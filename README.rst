@@ -14,6 +14,8 @@ Features two-way synchronization of the following details:
 
 *This project is in the very early development stages and does not yet have proper tests in place, use it at your own risk.*
 
+It is suggested you `backup your Clubhouse data <https://github.com/huntrar/exporter>`_ before using this program.
+
 Documentation
 -------------
 
