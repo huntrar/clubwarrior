@@ -1,3 +1,8 @@
+0.0.3
+------
+
+ - Bugfix: Calling strftime on missing task due date
+
 0.0.2
 ------
 

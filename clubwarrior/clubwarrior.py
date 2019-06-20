@@ -319,7 +319,7 @@ class ClubWarrior:
                 task['project'] = story['project']
 
             # Strip tzinfo that TaskWarrior includes
-            task_due = datetime.strftime(task['due'], "%Y-%m-%dT%H:%M:%SZ")
+            task_due = datetime.strftime(task['due'], "%Y-%m-%dT%H:%M:%SZ") if task['due'] else None
             if task_due != story['deadline']:
                 task['due'] = datetime.strptime(story['deadline'], "%Y-%m-%dT%H:%M:%SZ") if story['deadline'] else None
 
