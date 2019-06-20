@@ -18,6 +18,9 @@ from .clubhouse import ClubhouseClient, Story
 #           Might make things cluttered very quickly, but makes more sense granularity wise
 #       Option to annotate tasks with Clubhouse URL
 #           These annotations display by default in vit and would increase clutter, but handy to open with taskopen
+#       Allow searching stories by other variables and collected together. Most importantly requester, other owners
+# TODO: Bugfixes
+#       Possible Bug: It seems the Clubhouse API may not return stories where there are many owners? look into this
 
 
 class ClubWarrior:
@@ -315,11 +318,10 @@ class ClubWarrior:
             if task['project'] != story['project']:
                 task['project'] = story['project']
 
-            if story['deadline'] is not None:
-                # Strip tzinfo that TaskWarrior includes
-                task_due = datetime.strftime(task['due'], "%Y-%m-%dT%H:%M:%SZ")
-                if task_due != story['deadline']:
-                    task['due'] = datetime.strptime(story['deadline'], "%Y-%m-%dT%H:%M:%SZ")
+            # Strip tzinfo that TaskWarrior includes
+            task_due = datetime.strftime(task['due'], "%Y-%m-%dT%H:%M:%SZ")
+            if task_due != story['deadline']:
+                task['due'] = datetime.strptime(story['deadline'], "%Y-%m-%dT%H:%M:%SZ") if story['deadline'] else None
 
             story_blocked_by = set(local_stories[x]['task_uuid'] for x in story['blocked_by'].values() if x in local_stories)
             task_blocked_by = set(update_stories[x]['task_uuid'] for x in task['depends']._uuids if x in update_stories) if task['depends'] else set()
