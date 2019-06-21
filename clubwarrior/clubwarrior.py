@@ -10,12 +10,15 @@ from .clubhouse import ClubhouseClient, Story
 
 # TODO: See additional comments strewn throughout the file
 #       Tests
+#       A clearer enforcement of required data types and value restrictions
 #       Run as TaskWarrior hook
 #       Include instructions to run as cron job
 #           Also send signal to redraw vit display somehow
 #       Manual conflict resolution
 #       Import tasks instead of stories?
 #           Might make things cluttered very quickly, but makes more sense granularity wise
+#           Make this an option. You can import as: story, task
+#           Also make it an option whether to import as: owner, requester, both
 #       Option to annotate tasks with Clubhouse URL
 #           These annotations display by default in vit and would increase clutter, but handy to open with taskopen
 #       Allow searching stories by other variables and collected together. Most importantly requester, other owners
@@ -296,7 +299,7 @@ class ClubWarrior:
         # Update existing tasks
         for task in tasks:
             story = update_stories.get(task['uuid'], Story())
-            if task['description'] != story['name']:
+            if task['description'] != story['name'] and story['name']:
                 task['description'] = story['name']
 
             if story['workflow_state'] in self.POSTDEV_STATES:

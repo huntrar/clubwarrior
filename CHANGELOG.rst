@@ -1,3 +1,8 @@
+0.0.4
+------
+
+ - Bugfix: Disallow setting an empty task name
+
 0.0.3
 ------
 
